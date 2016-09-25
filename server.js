@@ -8,7 +8,10 @@ var path = require('path');
 var io = require('socket.io')(http, {path: '/public/socket.io'});
 var PythonShell = require('python-shell');
 var secrets = require('./config/secrets.js');
-
+var musicPlayer = require('./modules/music_player');
+var mp = new musicPlayer('/Volumes/MUSIC/chill');
+mp.foo();
+//mp.player.play();
 var state = {
   flash: false,
   light: false,
@@ -77,7 +80,6 @@ function handleResponse(body) {
       if (key === 'led'){
         var led;
         try {
-          console.log(state);
           if (properties['light']) {
             led = properties['led'].split(",");
             state['led'] = led;
@@ -99,7 +101,6 @@ function handleResponse(body) {
   } catch (e) {
     console.log(e);
   }
-  console.log(state.refreshTimeout);
   runScripts();
 }
 
