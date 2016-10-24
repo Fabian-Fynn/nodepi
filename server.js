@@ -8,10 +8,6 @@ var path = require('path');
 var io = require('socket.io')(http, {path: '/public/socket.io'});
 var PythonShell = require('python-shell');
 var secrets = require('./config/secrets.js');
-var musicPlayer = require('./modules/music_player');
-var mp = new musicPlayer('/Volumes/MUSIC/chill');
-mp.foo();
-//mp.player.play();
 var state = {
   flash: false,
   light: false,
@@ -41,7 +37,7 @@ function led() {
   var options = {
     mode: 'text',
     pythonOptions: ['-u'],
-    scriptPath: '/home/pi/projects/nodepi/scripts',
+    scriptPath: '/home/deploy/projects/nodepi/scripts',
     args: [state.led[0], state.led[1], state.led[2]]
   };
 
